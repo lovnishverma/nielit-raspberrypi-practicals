@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NIELIT Raspberry Pi Practicals - Complete Interactive Laboratory Manual and Developer API Documentation.">
+  <title>NIELIT Raspberry Pi Practicals | Interactive Student Manual & Documentation</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Manual Stylesheet -->
+  <link rel="stylesheet" href="assets/manual.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-brand">
+      <span style="font-size: 1.5rem;">🍓</span>
+      <span>NIELIT Raspberry Pi Practicals</span>
+      <span class="brand-badge">v1.0.0</span>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">☀️</button>
+      <button class="btn-pill" onclick="window.print()" title="Print this laboratory manual or export as PDF">🖨️ Print / Save PDF</button>
+    </div>
+  </header>
+
+  <!-- Application Container -->
+  <div class="app-container">
+
+    <!-- Left Sticky Sidebar -->
+    <aside class="sidebar">
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchPracticals" class="search-input" placeholder="Search practicals, pins, sensors...">
+      </div>
+
+      <div class="nav-section-title">Navigation</div>
+      <ul class="nav-list">
+        <li><a href="#heroSection" class="nav-item-btn"><span>🏠 Lab Overview</span></a></li>
+        <li><a href="#pinoutSection" class="nav-item-btn"><span>📌 40-Pin GPIO Header</span></a></li>
+        <li><a href="#apiSection" class="nav-item-btn"><span>📦 Library API Reference</span></a></li>
+        <li><a href="#safetySection" class="nav-item-btn"><span>⚡ Lab Safety Rules</span></a></li>
+      </ul>
+
+      <div class="nav-section-title">Practicals (3.1 — 3.20)</div>
+      <ul class="nav-list" id="sidebarNavList">
+        <!-- Populated via manual.js -->
+      </ul>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+
+      <!-- Hero Header -->
+      <section class="hero-card" id="heroSection">
+        <h1 class="hero-title">Raspberry Pi Laboratory Manual</h1>
+        <p class="hero-subtitle">
+          Official interactive student guide for the <strong>NIELIT Raspberry Pi Practical Courseware</strong>. 
+          Featuring 20 hands-on experiments across digital GPIO, sensors, motor control, LCD displays, SPI/I2C buses, SQLite telemetry, and Cloud IoT messaging.
+        </p>
+
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-val">20</div>
+            <div class="stat-label">Total Practicals</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val">10+</div>
+            <div class="stat-label">Reusable Library Modules</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val">BCM</div>
+            <div class="stat-label">Standard GPIO Scheme</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val">100%</div>
+            <div class="stat-label">Mocked CI Test Coverage</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive 40-Pin GPIO Visualizer -->
+      <section class="pinout-section" id="pinoutSection">
+        <div class="pinout-header">
+          <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Interactive 40-Pin GPIO Header Pinout</h2>
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">
+            Hover over any pin to check which practicals utilize it. Click any pin for detailed electrical specifications.
+          </p>
+        </div>
+
+        <div id="pinHoverBanner" class="callout callout-info" style="display: none; margin-bottom: 1.25rem;"></div>
+
+        <div class="pinout-board" id="pinoutBoard">
+          <!-- Populated via manual.js -->
+        </div>
+
+        <div class="pinout-legend">
+          <div class="legend-item"><span class="legend-dot bg-3v3"></span> 3.3V Power</div>
+          <div class="legend-item"><span class="legend-dot bg-5v"></span> 5V Power</div>
+          <div class="legend-item"><span class="legend-dot bg-gnd"></span> Ground (GND)</div>
+          <div class="legend-item"><span class="legend-dot bg-gpio"></span> GPIO (General)</div>
+          <div class="legend-item"><span class="legend-dot bg-i2c"></span> I2C Bus</div>
+          <div class="legend-item"><span class="legend-dot bg-spi"></span> SPI Bus</div>
+          <div class="legend-item"><span class="legend-dot bg-uart"></span> UART Serial</div>
+        </div>
+      </section>
+
+      <!-- Category Filter Bar -->
+      <div class="filter-bar">
+        <span style="font-weight: 700; font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; margin-right: 0.5rem;">Filter:</span>
+        <button class="filter-chip active" data-filter="All">All Practicals</button>
+        <button class="filter-chip" data-filter="Beginner">Beginner</button>
+        <button class="filter-chip" data-filter="Intermediate">Intermediate</button>
+        <button class="filter-chip" data-filter="Advanced">Advanced</button>
+        <button class="filter-chip" data-filter="GPIO">GPIO & Digital</button>
+        <button class="filter-chip" data-filter="Sensors">Sensors</button>
+        <button class="filter-chip" data-filter="Actuators">Actuators & Motors</button>
+        <button class="filter-chip" data-filter="Displays">Displays</button>
+        <button class="filter-chip" data-filter="Communication">IoT & Comm</button>
+        <button class="filter-chip" data-filter="Storage">Database</button>
+        <button class="filter-chip" data-filter="Networking">Web Server</button>
+      </div>
+
+      <!-- Practicals Dynamic Container -->
+      <section id="practicalsContainer">
+        <!-- Rendered via manual.js from PRACTICALS_DATA -->
+      </section>
+
+      <!-- Library API Quick Reference Section -->
+      <section class="pinout-section" id="apiSection">
+        <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">📦 Reusable Library API Reference (<code>nielit_rpi</code>)</h2>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">
+          Students and instructors can import these production-quality abstraction classes into their own custom projects.
+        </p>
+
+        <div class="api-card">
+          <div class="api-signature">from nielit_rpi.gpio import LEDController(pin: int)</div>
+          <div class="api-desc">Controls single-pin digital output. Methods: <code>on()</code>, <code>off()</code>, <code>toggle()</code>, <code>blink(on_time, off_time, n)</code>, property <code>is_lit</code>. Context-manager enabled.</div>
+        </div>
+
+        <div class="api-card">
+          <div class="api-signature">from nielit_rpi.gpio import ButtonReader(pin: int, pull_up: bool = True, bounce_time = None)</div>
+          <div class="api-desc">Reads digital inputs with software debounce. Callbacks: <code>when_pressed</code>, <code>when_released</code>, property <code>is_pressed</code>.</div>
+        </div>
+
+        <div class="api-card">
+          <div class="api-signature">from nielit_rpi.gpio import PWMLEDController(pin: int, frequency: int = 100)</div>
+          <div class="api-desc">Controls perceived brightness and pulsing. Properties: <code>value</code> (0.0 to 1.0), methods: <code>pulse()</code>, <code>fade_in()</code>, <code>fade_out()</code>.</div>
+        </div>
+
+        <div class="api-card">
+          <div class="api-signature">from nielit_rpi.sensors import UltrasonicSensor(trigger_pin: int, echo_pin: int, max_distance: float = 4.0)</div>
+          <div class="api-desc">HC-SR04 distance measurement. Properties: <code>distance_cm</code>, <code>distance_m</code>, method: <code>in_range(threshold_cm)</code>.</div>
+        </div>
+
+        <div class="api-card">
+          <div class="api-signature">from nielit_rpi.sensors import DHTSensor(pin: board.Pin, sensor_type: str = "DHT11")</div>
+          <div class="api-desc">Reads ambient climate. Method: <code>read() -> tuple[temp, humidity]</code> with automatic checksum retry handling.</div>
+        </div>
+
+        <div class="api-card">
+          <div class="api-signature">from nielit_rpi.actuators import ServoController(pin: int, min_angle=-90, max_angle=90)</div>
+          <div class="api-desc">Positions SG90 servo motor. Property: <code>angle</code> (-90° to +90°), methods: <code>sweep()</code>, <code>detach()</code>.</div>
+        </div>
+
+        <div class="api-card">
+          <div class="api-signature">from nielit_rpi.displays import I2CLCD(address: int = 0x27, bus_number: int = 1)</div>
+          <div class="api-desc">Controls 16x2 HD44780 LCD via PCF8574. Methods: <code>write_string(text, line)</code>, <code>clear()</code>.</div>
+        </div>
+
+        <div class="api-card">
+          <div class="api-signature">from nielit_rpi.storage import SensorDataLogger(db_path: str, table_name: str)</div>
+          <div class="api-desc">SQLite telemetry store. Methods: <code>create_table(columns)</code>, <code>log_reading(**kwargs)</code>, <code>get_readings(limit)</code>, <code>execute_query(query, params)</code>.</div>
+        </div>
+      </section>
+
+      <!-- Lab Safety Summary Section -->
+      <section class="pinout-section" id="safetySection">
+        <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">⚡ Essential Laboratory Safety Rules</h2>
+        <div class="callout callout-danger" style="margin-bottom: 1rem;">
+          <div class="callout-icon">🛑</div>
+          <div>
+            <strong>3.3V Logic Limit:</strong> Raspberry Pi GPIO pins operate strictly at <strong>3.3V logic</strong>. NEVER connect a 5V sensor output or signal directly to a GPIO pin without a resistor voltage divider or logic level shifter.
+          </div>
+        </div>
+
+        <div class="callout callout-warning" style="margin-bottom: 1rem;">
+          <div class="callout-icon">⚠️</div>
+          <div>
+            <strong>Motor & Inductive Loads:</strong> Servos and high-power motors draw heavy current surges. Power them from an <strong>external 5V supply</strong> sharing a common Ground with the Pi. Do NOT power them from the Pi 3.3V rail.
+          </div>
+        </div>
+
+        <div class="callout callout-warning">
+          <div class="callout-icon">🔌</div>
+          <div>
+            <strong>Mains Isolation:</strong> Relays in educational practicals should only switch low-voltage DC loads (e.g. 12V lamps). Never handle 110V/230V AC mains electricity on an open breadboard.
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <p><strong>National Institute of Electronics and Information Technology (NIELIT)</strong></p>
+        <p style="margin-top: 0.25rem;">Raspberry Pi Practical Series • Production Package v1.0.0 • Distributed under MIT License</p>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/practicals_data.js"></script>
+  <script src="assets/manual.js"></script>
+</body>
+</html>

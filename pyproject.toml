@@ -1,0 +1,72 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nielit-raspberrypi-practicals"
+version = "1.0.0"
+description = "Professional Python package for NIELIT Raspberry Pi Practical programs"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [
+    {name = "NIELIT", email = "info@nielit.gov.in"}
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Topic :: Education",
+    "Topic :: System :: Hardware",
+    "Intended Audience :: Education",
+]
+keywords = [
+    "raspberry-pi", "nielit", "iot", "gpio", "sensors", 
+    "practicals", "electronics", "hardware", "education"
+]
+
+dependencies = [
+    "gpiozero",
+]
+
+[project.urls]
+Homepage = "https://www.nielit.gov.in"
+Documentation = "https://github.com/nielit/nielit-raspberrypi-practicals"
+Repository = "https://github.com/nielit/nielit-raspberrypi-practicals"
+"Bug Tracker" = "https://github.com/nielit/nielit-raspberrypi-practicals/issues"
+
+[project.optional-dependencies]
+sensors = ["adafruit-circuitpython-dht", "adafruit-blinka"]
+display = ["smbus2"]
+rfid = ["mfrc522", "spidev"]
+iot = ["paho-mqtt"]
+web = ["flask"]
+all = [
+    "adafruit-circuitpython-dht",
+    "adafruit-blinka",
+    "smbus2",
+    "mfrc522",
+    "spidev",
+    "paho-mqtt",
+    "flask",
+]
+dev = ["pytest", "pytest-mock", "black", "ruff", "mypy", "build"]
+
+[project.scripts]
+nielit-rpi = "nielit_rpi.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+nielit_rpi = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]

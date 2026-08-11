@@ -1,0 +1,6 @@
+pytest
+pytest-mock
+black
+ruff
+mypy
+build

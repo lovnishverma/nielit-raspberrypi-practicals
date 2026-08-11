@@ -1,0 +1,9 @@
+gpiozero
+adafruit-circuitpython-dht
+adafruit-blinka
+smbus2
+mfrc522
+spidev
+paho-mqtt
+flask
+requests

@@ -5,6 +5,8 @@
 
 A professional Python package containing 20 Raspberry Pi practical programs developed for the NIELIT curriculum.
 
+https://pypi.org/project/nielit-raspberrypi-practicals/
+
 ## Features
 - **Comprehensive**: 20 distinct practical programs covering basic GPIO to advanced IoT concepts.
 - **Hardware Agnostic**: Tested on Raspberry Pi 3, 4, and 5 running Raspberry Pi OS (Bookworm).

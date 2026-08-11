@@ -95,17 +95,18 @@ def cmd_run(practical_id: str) -> None:
             sys.exit(0)
             
     # Search for the practical's main.py in several locations:
-    # 1. Installed package data (examples/ alongside src/)
-    # 2. Project root examples/ directory
-    # 3. Current working directory examples/
+    # 1. Current working directory examples/ (allows local student edits)
+    # 2. Packaged internal examples/ directory (works anywhere when pip installed)
+    # 3. Project repository root examples/ directory
     practical_dir = f"practical_{practical_id}"
     
     pkg_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.abspath(os.path.join(pkg_dir, "..", ".."))
     
     search_paths = [
-        os.path.join(project_root, "examples", practical_dir, "main.py"),
         os.path.join(os.getcwd(), "examples", practical_dir, "main.py"),
+        os.path.join(pkg_dir, "examples", practical_dir, "main.py"),
+        os.path.join(project_root, "examples", practical_dir, "main.py"),
     ]
     
     main_py_path = None
@@ -118,8 +119,8 @@ def cmd_run(practical_id: str) -> None:
         print(f"\nError: Could not find practical '{practical_id}' in:")
         for p in search_paths:
             print(f"  - {p}")
-        print("\nHint: Run from the project root directory, or ensure the")
-        print("package is properly installed with examples.")
+        print("\nHint: You can export all practicals to your current folder by running:")
+        print("  nielit-rpi export-examples")
         sys.exit(1)
         
     print(f"Executing {main_py_path}...\n" + "-"*40)
@@ -129,6 +130,43 @@ def cmd_run(practical_id: str) -> None:
         print("\nExecution stopped by user.")
     except subprocess.CalledProcessError as e:
         print(f"\nExecution failed with code {e.returncode}")
+
+
+def cmd_export_examples(destination: str = "examples") -> None:
+    """Export bundled practicals to a local directory for editing."""
+    pkg_dir = os.path.dirname(os.path.abspath(__file__))
+    src_examples = os.path.join(pkg_dir, "examples")
+    
+    if not os.path.exists(src_examples):
+        # Fallback to repo root if running from source tree
+        src_examples = os.path.abspath(os.path.join(pkg_dir, "..", "..", "examples"))
+        
+    if not os.path.exists(src_examples):
+        print("Error: Could not locate bundled examples directory.")
+        sys.exit(1)
+        
+    dest_path = os.path.abspath(destination)
+    print(f"Exporting 20 NIELIT practicals to: {dest_path}")
+    
+    import shutil
+    for item in sorted(os.listdir(src_examples)):
+        if item.startswith("practical_"):
+            s = os.path.join(src_examples, item)
+            d = os.path.join(dest_path, item)
+            if os.path.isdir(s):
+                os.makedirs(d, exist_ok=True)
+                for f in os.listdir(s):
+                    if f.startswith("__") or f.endswith(".pyc"):
+                        continue
+                    src_file = os.path.join(s, f)
+                    if os.path.isfile(src_file):
+                        shutil.copy2(src_file, os.path.join(d, f))
+                print(f"  [+] {item}")
+                
+    print(f"\nSuccessfully exported all practicals to '{destination}/'.")
+    print("You can now edit and run them locally:")
+    print(f"  cd {destination}/practical_3_2")
+    print("  python main.py")
 
 
 def main() -> None:
@@ -141,14 +179,18 @@ def main() -> None:
     
     # Info command
     info_parser = subparsers.add_parser("info", help="Show details for a specific practical")
-    info_parser.add_argument("practical_id", help="The ID of the practical (e.g., 3_1)")
+    info_parser.add_argument("practical_id", help="The ID of the practical (e.g., 3_1, 3_2)")
     
     # Check command
     subparsers.add_parser("check", help="Check system and hardware capability")
     
     # Run command
     run_parser = subparsers.add_parser("run", help="Run a specific practical")
-    run_parser.add_argument("practical_id", help="The ID of the practical (e.g., 3_1)")
+    run_parser.add_argument("practical_id", help="The ID of the practical (e.g., 3_1, 3_2)")
+    
+    # Export examples command
+    export_parser = subparsers.add_parser("export-examples", help="Export all practical example files to local directory")
+    export_parser.add_argument("--dest", "-d", default="examples", help="Destination directory (default: examples)")
     
     args = parser.parse_args()
     
@@ -160,6 +202,8 @@ def main() -> None:
         cmd_check()
     elif args.command == "run":
         cmd_run(args.practical_id)
+    elif args.command == "export-examples":
+        cmd_export_examples(args.dest)
     else:
         parser.print_help()
 

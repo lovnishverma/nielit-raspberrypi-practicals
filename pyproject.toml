@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nielit-raspberrypi-practicals"
-version = "1.0.1"
+version = "1.0.2"
 description = "Professional Python package for NIELIT Raspberry Pi Practical programs"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -62,7 +62,7 @@ nielit-rpi = "nielit_rpi.cli:main"
 where = ["src"]
 
 [tool.setuptools.package-data]
-nielit_rpi = ["py.typed"]
+nielit_rpi = ["py.typed", "examples/**/*", "examples/**/main.py", "examples/**/README.md"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

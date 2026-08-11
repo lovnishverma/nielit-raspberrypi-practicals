@@ -1,9 +1,13 @@
 # NIELIT Raspberry Pi Practicals
 
+[![PyPI version](https://img.shields.io/pypi/v/nielit-raspberrypi-practicals.svg)](https://pypi.org/project/nielit-raspberrypi-practicals/)
+[![PyPI Downloads](https://img.shields.io/pypi/dm/nielit-raspberrypi-practicals.svg)](https://pypi.org/project/nielit-raspberrypi-practicals/)
 ![Python Version](https://img.shields.io/badge/python-3.9%2B-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
+![License](https://img.shields.io/badge/license-NIELIT%20Ropar-green)
 
-A professional Python package containing 20 Raspberry Pi practical programs developed for the NIELIT curriculum.
+A professional, production-quality Python package containing 20 Raspberry Pi practical programs developed for the NIELIT curriculum.
+
+**PyPI Package:** [pypi.org/project/nielit-raspberrypi-practicals/](https://pypi.org/project/nielit-raspberrypi-practicals/1.0.0/)
 
 https://pypi.org/project/nielit-raspberrypi-practicals/
 
@@ -78,7 +82,7 @@ nielit-rpi run 3_2
 ## Development Setup
 
 ```bash
-git clone https://github.com/nielit/nielit-raspberrypi-practicals.git
+git clone https://github.com/lovnishverma/nielit-raspberrypi-practicals.git
 cd nielit-raspberrypi-practicals
 pip install -e .[dev,all]
 ```
@@ -90,4 +94,4 @@ pytest
 ```
 
 ## License
-MIT License. Copyright (c) 2024 NIELIT.
+NIELIT Ropar License. Copyright (c) 2026 NIELIT Ropar.

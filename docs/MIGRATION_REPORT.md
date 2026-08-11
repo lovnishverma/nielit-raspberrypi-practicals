@@ -1,4 +1,9 @@
-# Migration Report
+# Migration Report — NIELIT Raspberry Pi Practicals Package v1.0.1
+
+- **Package Name:** `nielit-raspberrypi-practicals`
+- **Import Name:** `nielit_rpi`
+- **License:** NIELIT Ropar License. Copyright (c) 2026 NIELIT Ropar.
+- **Target Platform:** Raspberry Pi OS (Bookworm), Python 3.9+
 
 ## Original Structure
 The original structure consisted of a flat `examples/` directory containing 20 practical subdirectories, each with its own `main.py` and `README.md`.

@@ -523,7 +523,7 @@ sudo reboot
 - **Organization:** [National Institute of Electronics & Information Technology (NIELIT), Ropar](https://nielit.gov.in/ropar/)
 - **License:** NIELIT Ropar License. Copyright (c) 2026 NIELIT Ropar.
 - **Maintainer:** Lovnish Verma ([@lovnishverma](https://github.com/lovnishverma))
-- **Email:** `info@nielit.gov.in` / `ropar@nielit.gov.in`
+- **Email:** `princelv84@gmail.com`
 
 ---
 
